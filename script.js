@@ -319,25 +319,116 @@ if (navToggle && navLinks && menuIcon) {
 }
 
 /* ══════════════════════════════════════════
-   CONTACT FORM
+   CONTACT FORM & CONNECTION INFO
+   ------------------------------------------
+   To receive messages from this form, you have 
+   two primary options:
+   
+   1. Formspree (RECOMMENDED):
+      - Go to formspree.io and create an account.
+      - Update your <form> action in index.html to: 
+        https://formspree.io/f/YOUR_ID_HERE
+      - This forwards all form data to your email 
+        automatically.
+      - Your current code will log the data to the 
+        console and clear the inputs.
+
+   2. EmailJS:
+      - Uses their API directly from frontend.
 ══════════════════════════════════════════ */
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
-  contactForm.addEventListener('submit', function (e) {
+  contactForm.addEventListener('submit', async function (e) {
+    const action = this.getAttribute('action');
+    
+    // If it's the placeholder, use simulation mode
+    if (!action || action.includes('YOUR_FORMSPREEE_ID_HERE')) {
+      e.preventDefault();
+      console.warn("Formspree ID not set! Using simulation mode.");
+      simulateSubmission(this);
+      return;
+    }
+
+    // Real Submission via AJAX
     e.preventDefault();
     const btn = this.querySelector('button[type=submit]');
     const successMsg = document.getElementById('form-success');
-    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Transmitting...';
-    btn.disabled = true;
-    setTimeout(() => {
-      this.querySelectorAll('input, textarea').forEach(el => el.value = '');
-      btn.style.display = 'none';
-      if (successMsg) successMsg.style.display = 'block';
-      setTimeout(() => {
-        btn.style.display = 'flex'; btn.disabled = false;
-        btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i>Send Message';
-        if (successMsg) successMsg.style.display = 'none';
-      }, 4000);
-    }, 1500);
+    const formData = new FormData(this);
+
+    if (btn) {
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Transmitting...';
+      btn.disabled = true;
+    }
+
+    try {
+      const response = await fetch(action, {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        this.reset();
+        if (btn) btn.style.display = 'none';
+        if (successMsg) {
+          successMsg.style.display = 'block';
+          successMsg.innerHTML = `<i class="fa-solid fa-check-circle"></i> Connection established. Message sent!`;
+        }
+        setTimeout(() => {
+          if (btn) {
+            btn.style.display = 'flex';
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i>Send Message';
+          }
+          if (successMsg) successMsg.style.display = 'none';
+        }, 5000);
+      } else {
+        throw new Error("Transmission failed.");
+      }
+    } catch (err) {
+      if (btn) {
+        btn.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Error Signal';
+        btn.disabled = false;
+      }
+      alert("Neural link failed: Please try again or use direct email.");
+    }
   });
+}
+
+/* ══════════════════════════════════════════
+   PROJECT CARD CLICKABILITY
+══════════════════════════════════════════ */
+document.querySelectorAll('.project-card').forEach(card => {
+  card.addEventListener('click', (e) => {
+    if (e.target.closest('a')) return;
+    const link = card.querySelector('.project-link');
+    if (link) window.open(link.href, '_blank');
+  });
+});
+
+function simulateSubmission(form) {
+  const btn = form.querySelector('button[type=submit]');
+  const successMsg = document.getElementById('form-success');
+  
+  if (btn) {
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Simulating...';
+    btn.disabled = true;
+  }
+
+  setTimeout(() => {
+    form.reset();
+    if (btn) btn.style.display = 'none';
+    if (successMsg) {
+      successMsg.style.display = 'block';
+      successMsg.innerHTML = `<i class="fa-solid fa-check-circle"></i> Simulation Complete. Update your Formspree ID!`;
+    }
+    setTimeout(() => {
+      if (btn) {
+        btn.style.display = 'flex';
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i>Send Message';
+      }
+      if (successMsg) successMsg.style.display = 'none';
+    }, 5000);
+  }, 1500);
 }
