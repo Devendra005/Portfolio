@@ -288,17 +288,6 @@ window.addEventListener('scroll', () => {
   });
 })();
 
-/* ══════════════════════════════════════════
-   THEME TOGGLE
-══════════════════════════════════════════ */
-const themeBtn = document.getElementById('theme-btn');
-if (themeBtn) {
-  themeBtn.addEventListener('click', () => {
-    const html = document.documentElement;
-    const isLight = html.dataset.theme === 'light';
-    html.dataset.theme = isLight ? 'dark' : 'light';
-  });
-}
 
 /* ══════════════════════════════════════════
    MOBILE NAV
