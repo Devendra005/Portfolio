@@ -304,20 +304,36 @@ if (themeBtn) {
    MOBILE NAV
 ══════════════════════════════════════════ */
 const navToggle = document.getElementById('nav-toggle');
-const navLinks = document.getElementById('nav-links');
-const menuIcon = document.getElementById('menu-icon');
-if (navToggle && navLinks && menuIcon) {
-  navToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('open');
-    menuIcon.className = navLinks.classList.contains('open') ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
-  });
+const navLinks  = document.getElementById('nav-links');
+const navClose  = document.getElementById('nav-close');
+
+function openMenu() {
+  navLinks.classList.add('open');
+}
+function closeMenu() {
+  navLinks.classList.remove('open');
+}
+
+if (navToggle && navLinks) {
+  navToggle.addEventListener('click', openMenu);
+}
+if (navClose) {
+  navClose.addEventListener('click', closeMenu);
+}
+if (navLinks) {
+  // Close when any nav link is clicked
   navLinks.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => {
-      navLinks.classList.remove('open');
-      menuIcon.className = 'fa-solid fa-bars';
-    });
+    a.addEventListener('click', closeMenu);
+  });
+  // Close when clicking the dark overlay backdrop
+  navLinks.addEventListener('click', function (e) {
+    if (e.target === navLinks) closeMenu();
   });
 }
+// Close with Escape key
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeMenu();
+});
 
 /* ══════════════════════════════════════════
    CONTACT FORM

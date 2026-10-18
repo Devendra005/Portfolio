@@ -128,7 +128,17 @@ nav.scrolled { padding: 12px 48px; }
 .theme-btn:hover { background: var(--bg-glass-hover); box-shadow: var(--glow-cyan); }
 .nav-toggle {
   display: none; background: none; border: none;
-  color: var(--accent-cyan); font-size: 1.4rem; cursor: pointer;
+  color: var(--accent-cyan); font-size: 1.5rem; cursor: pointer;
+  padding: 4px 8px; border-radius: 8px;
+  transition: var(--transition);
+  line-height: 1;
+}
+.nav-toggle:hover { background: rgba(0,245,255,0.08); }
+
+/* Desktop: hide the close item inside the overlay */
+.nav-close-item { display: none; }
+.nav-close {
+  display: none;
 }
 
 /* ─── SECTIONS WRAPPER ─── */
@@ -672,18 +682,79 @@ footer {
 .reveal-right.visible { opacity: 1; transform: translateX(0); }
 
 /* ─── MOBILE NAV ─── */
+@keyframes navSlideIn {
+  from { opacity: 0; transform: translateY(-16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 @media (max-width: 900px) {
   nav { padding: 16px 24px; }
   nav.scrolled { padding: 12px 24px; }
+
+  /* Overlay */
   .nav-links {
-    display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(4,6,15,0.97); flex-direction: column;
-    align-items: center; justify-content: center; gap: 40px;
-    z-index: 400;
+    display: none;
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(4, 6, 15, 0.97);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+    z-index: 600;          /* above nav bar (500) */
+    padding: 0 24px;
+    list-style: none;
+    margin: 0;
   }
-  .nav-links.open { display: flex; }
-  .nav-links a { font-size: 1.1rem; }
-  .nav-toggle { display: block; z-index: 501; }
+  .nav-links.open {
+    display: flex;
+    animation: navSlideIn 0.28s ease forwards;
+  }
+  .nav-links a {
+    font-size: 1.15rem;
+    letter-spacing: 3px;
+    color: var(--text-primary);
+    padding: 6px 0;
+  }
+  .nav-links a:hover { color: var(--accent-cyan); }
+
+  /* Close button inside overlay */
+  .nav-close-item {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+  .nav-close {
+    display: flex;
+    align-items: center; justify-content: center;
+    background: rgba(0,245,255,0.06);
+    border: 1px solid rgba(0,245,255,0.2);
+    color: var(--accent-cyan);
+    font-size: 1.4rem;
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+  .nav-close:hover {
+    background: rgba(0,245,255,0.14);
+    box-shadow: var(--glow-cyan);
+  }
+
+  /* Hamburger toggle */
+  .nav-toggle {
+    display: flex;
+    align-items: center; justify-content: center;
+    z-index: 501;
+    width: 40px; height: 40px;
+    border-radius: 8px;
+    background: rgba(0,245,255,0.05);
+    border: 1px solid rgba(0,245,255,0.15);
+  }
+  .nav-toggle:hover { background: rgba(0,245,255,0.12); }
 
   /* Container */
   .container { padding: 0 20px; }
