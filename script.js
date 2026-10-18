@@ -5,6 +5,7 @@
   const canvas = document.getElementById('neural-canvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
+  if (!ctx) return;
   let nodes = [], W, H, animId;
   const NODE_COUNT = 135; // Denser network
   const CONNECT_DIST = 320; // Longer axons
@@ -41,29 +42,29 @@
   let worldRotX = 0, worldRotY = 0;
   let mouseTiltX = 0, mouseTiltY = 0;
 
+  function project(p) {
+    const x1 = p.x * Math.cos(worldRotY) - p.z * Math.sin(worldRotY);
+    const z1 = p.x * Math.sin(worldRotY) + p.z * Math.cos(worldRotY);
+    const y2 = p.y * Math.cos(worldRotX) - z1 * Math.sin(worldRotX);
+    const z2 = p.y * Math.sin(worldRotX) + z1 * Math.cos(worldRotX);
+
+    const depth = z2 + CAMERA_DEPTH;
+    if (depth < 40) return null;
+
+    const scale = PERSPECTIVE / depth;
+    return {
+      x: x1 * scale + W / 2,
+      y: y2 * scale + H / 2,
+      scale: Math.min(8, scale),
+      depth: depth
+    };
+  }
+
   function draw(t) {
     ctx.clearRect(0, 0, W, H);
 
     worldRotX += 0.0004 + mouseTiltY * 0.00008;
     worldRotY += 0.0003 + mouseTiltX * 0.00008;
-
-    function project(p) {
-      let x1 = p.x * Math.cos(worldRotY) - p.z * Math.sin(worldRotY);
-      let z1 = p.x * Math.sin(worldRotY) + p.z * Math.cos(worldRotY);
-      let y2 = p.y * Math.cos(worldRotX) - z1 * Math.sin(worldRotX);
-      let z2 = p.y * Math.sin(worldRotX) + z1 * Math.cos(worldRotX);
-
-      const depth = z2 + CAMERA_DEPTH;
-      if (depth < 40) return null;
-
-      const scale = PERSPECTIVE / depth;
-      return {
-        x: x1 * scale + W / 2,
-        y: y2 * scale + H / 2,
-        scale: Math.min(8, scale),
-        depth: depth
-      };
-    }
 
     nodes.forEach(n => {
       n.x += n.vx; n.y += n.vy; n.z += n.vz;
@@ -178,7 +179,7 @@
       if (!p) return;
       const dx = e.clientX - p.x, dy = e.clientY - p.y;
       const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < 200) {
+      if (dist > 0 && dist < 200) {
         const force = (1 - dist / 200) * 0.3;
         n.vx += (dx / dist) * force;
         n.vy += (dy / dist) * force;
@@ -319,79 +320,26 @@ if (navToggle && navLinks && menuIcon) {
 }
 
 /* ══════════════════════════════════════════
-   CONTACT FORM & CONNECTION INFO
-   ------------------------------------------
-   To receive messages from this form, you have 
-   two primary options:
-   
-   1. Formspree (RECOMMENDED):
-      - Go to formspree.io and create an account.
-      - Update your <form> action in index.html to: 
-        https://formspree.io/f/YOUR_ID_HERE
-      - This forwards all form data to your email 
-        automatically.
-      - Your current code will log the data to the 
-        console and clear the inputs.
-
-   2. EmailJS:
-      - Uses their API directly from frontend.
+   CONTACT FORM
 ══════════════════════════════════════════ */
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
-  contactForm.addEventListener('submit', async function (e) {
-    const action = this.getAttribute('action');
-    
-    // If it's the placeholder, use simulation mode
-    if (!action || action.includes('YOUR_FORMSPREEE_ID_HERE')) {
-      e.preventDefault();
-      console.warn("Formspree ID not set! Using simulation mode.");
-      simulateSubmission(this);
-      return;
-    }
-
-    // Real Submission via AJAX
+  contactForm.addEventListener('submit', function (e) {
     e.preventDefault();
-    const btn = this.querySelector('button[type=submit]');
     const successMsg = document.getElementById('form-success');
     const formData = new FormData(this);
+    const name = formData.get('name').trim();
+    const email = formData.get('email').trim();
+    const subject = formData.get('subject').trim() || `Portfolio contact from ${name}`;
+    const message = formData.get('message').trim();
+    const body = [`Name: ${name}`, `Email: ${email}`, '', message].join('\n');
+    const mailto = `mailto:devendrakumbhare005@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
-    if (btn) {
-      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Transmitting...';
-      btn.disabled = true;
+    if (successMsg) {
+        successMsg.textContent = 'Opening your email app with this message addressed to Devendra. Review and send it there.';
+        successMsg.style.display = 'block';
     }
-
-    try {
-      const response = await fetch(action, {
-        method: 'POST',
-        body: formData,
-        headers: { 'Accept': 'application/json' }
-      });
-
-      if (response.ok) {
-        this.reset();
-        if (btn) btn.style.display = 'none';
-        if (successMsg) {
-          successMsg.style.display = 'block';
-          successMsg.innerHTML = `<i class="fa-solid fa-check-circle"></i> Connection established. Message sent!`;
-        }
-        setTimeout(() => {
-          if (btn) {
-            btn.style.display = 'flex';
-            btn.disabled = false;
-            btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i>Send Message';
-          }
-          if (successMsg) successMsg.style.display = 'none';
-        }, 5000);
-      } else {
-        throw new Error("Transmission failed.");
-      }
-    } catch (err) {
-      if (btn) {
-        btn.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Error Signal';
-        btn.disabled = false;
-      }
-      alert("Neural link failed: Please try again or use direct email.");
-    }
+    window.location.href = mailto;
   });
 }
 
@@ -405,30 +353,3 @@ document.querySelectorAll('.project-card').forEach(card => {
     if (link) window.open(link.href, '_blank');
   });
 });
-
-function simulateSubmission(form) {
-  const btn = form.querySelector('button[type=submit]');
-  const successMsg = document.getElementById('form-success');
-  
-  if (btn) {
-    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Simulating...';
-    btn.disabled = true;
-  }
-
-  setTimeout(() => {
-    form.reset();
-    if (btn) btn.style.display = 'none';
-    if (successMsg) {
-      successMsg.style.display = 'block';
-      successMsg.innerHTML = `<i class="fa-solid fa-check-circle"></i> Simulation Complete. Update your Formspree ID!`;
-    }
-    setTimeout(() => {
-      if (btn) {
-        btn.style.display = 'flex';
-        btn.disabled = false;
-        btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i>Send Message';
-      }
-      if (successMsg) successMsg.style.display = 'none';
-    }, 5000);
-  }, 1500);
-}

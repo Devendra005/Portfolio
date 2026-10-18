@@ -93,6 +93,7 @@ nav.scrolled { padding: 12px 48px; }
   letter-spacing: 2px;
   text-shadow: var(--glow-cyan);
   text-decoration: none;
+  white-space: nowrap;
 }
 .nav-logo span { color: var(--accent-violet); }
 .nav-links { display: flex; gap: 36px; list-style: none; }
@@ -371,7 +372,7 @@ section { min-height: 100vh; padding: 100px 0 60px; position: relative; }
 /* ─── SKILLS SECTION ─── */
 #skills { background: transparent; }
 .skills-container {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 160px), 1fr));
   gap: 20px;
 }
 .skill-node {
@@ -435,7 +436,7 @@ section { min-height: 100vh; padding: 100px 0 60px; position: relative; }
 /* ─── PROJECTS SECTION ─── */
 #projects { background: transparent; }
 .projects-grid {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
   gap: 24px;
 }
 .project-card {
@@ -563,6 +564,7 @@ section { min-height: 100vh; padding: 100px 0 60px; position: relative; }
 .contact-grid {
   display: grid; grid-template-columns: 1fr 1.2fr; gap: 48px;
 }
+.contact-grid > * { min-width: 0; }
 .contact-info h3 {
   font-family: 'Orbitron', monospace;
   font-size: 1.2rem; margin-bottom: 24px;
@@ -589,7 +591,11 @@ section { min-height: 100vh; padding: 100px 0 60px; position: relative; }
   flex-shrink: 0;
 }
 .contact-link-text strong { display: block; font-size: 0.85rem; font-family: 'Orbitron', monospace; letter-spacing: 1px; }
-.contact-link-text span { font-size: 0.82rem; color: var(--text-muted); font-family: 'Share Tech Mono', monospace; }
+.contact-link-text { min-width: 0; }
+.contact-link-text span {
+  font-size: 0.82rem; color: var(--text-muted); font-family: 'Share Tech Mono', monospace;
+  overflow-wrap: anywhere;
+}
 
 /* Contact Form */
 .contact-form { display: flex; flex-direction: column; gap: 16px; }
@@ -614,7 +620,8 @@ section { min-height: 100vh; padding: 100px 0 60px; position: relative; }
   background: var(--bg-glass-hover);
 }
 .form-group textarea { min-height: 130px; }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.form-group { min-width: 0; }
 .form-success {
   display: none; text-align: center; padding: 20px;
   color: var(--accent-cyan); font-family: 'Share Tech Mono', monospace;
@@ -659,7 +666,7 @@ footer {
 .reveal-right.visible { opacity: 1; transform: translateX(0); }
 
 /* ─── MOBILE NAV ─── */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   nav { padding: 16px 24px; }
   nav.scrolled { padding: 12px 24px; }
   .nav-links {
@@ -675,13 +682,34 @@ footer {
   .about-grid { grid-template-columns: 1fr; gap: 48px; }
   .about-avatar-wrap { justify-content: center; }
   .about-stats { grid-template-columns: repeat(3,1fr); }
+  .projects-grid { grid-template-columns: minmax(0, 1fr); }
   .contact-grid { grid-template-columns: 1fr; }
-  .form-row { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: minmax(0, 1fr); }
   .hero-cta { flex-direction: column; align-items: center; }
   .footer-inner { flex-direction: column; text-align: center; }
   .resume-card { padding: 36px 24px; }
   #cursor, #cursor-trail { display: none; }
   body { cursor: auto; }
+  .reveal-left, .reveal-right { transform: translateY(30px); }
+  .reveal-left.visible, .reveal-right.visible { transform: translateY(0); }
+}
+
+@media (max-width: 480px) {
+  nav, nav.scrolled { padding-right: 16px; padding-left: 16px; }
+  .nav-logo { font-size: clamp(0.82rem, 4vw, 1rem); letter-spacing: 0.5px; }
+  .nav-actions { gap: 8px; }
+  .theme-btn { padding: 8px 10px; }
+  .container { padding-right: 18px; padding-left: 18px; }
+  .hero-badge { max-width: calc(100vw - 36px); padding-right: 14px; padding-left: 14px; letter-spacing: 2px; }
+  .hero-name { font-size: clamp(2.25rem, 12vw, 3rem); }
+  .hero-tagline { letter-spacing: 1px; }
+  .about-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .avatar-ring, .avatar-img { width: min(280px, 72vw); height: min(280px, 72vw); }
+  .project-header { padding-right: 20px; padding-left: 20px; }
+  .project-body { padding-right: 20px; padding-left: 20px; }
+  .resume-card { padding: 32px 20px; }
+  .form-group input, .form-group textarea { padding-right: 14px; padding-left: 14px; }
+  footer { padding-right: 18px; padding-left: 18px; }
 }
 
 /* ─── SCANLINE OVERLAY ─── */
