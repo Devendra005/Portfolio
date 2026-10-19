@@ -1,3 +1,5 @@
+document.documentElement.classList.add('js');
+
 /* ══════════════════════════════════════════
    NEURAL NETWORK CANVAS ANIMATION
 ══════════════════════════════════════════ */
@@ -6,8 +8,10 @@
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
   if (!ctx) return;
-  let nodes = [], W, H, animId;
-  const NODE_COUNT = 135; // Denser network
+  const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (motionPreference.matches) return;
+  let nodes = [], W, H, animId = 0, isAnimating = false;
+  const NODE_COUNT = window.matchMedia('(max-width: 600px)').matches ? 55 : 90;
   const CONNECT_DIST = 320; // Longer axons
   const PERSPECTIVE = 650;
   const CAMERA_DEPTH = 600;
@@ -162,15 +166,38 @@
       ctx.globalAlpha = 1;
     });
 
-    animId = requestAnimationFrame(draw);
+    if (isAnimating) animId = requestAnimationFrame(draw);
   }
 
   resize();
   initNodes();
-  requestAnimationFrame(draw);
+  function startAnimation() {
+    if (isAnimating || document.hidden || motionPreference.matches) return;
+    isAnimating = true;
+    animId = requestAnimationFrame(draw);
+  }
+  function stopAnimation() {
+    isAnimating = false;
+    cancelAnimationFrame(animId);
+  }
+  startAnimation();
   window.addEventListener('resize', () => resize());
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stopAnimation();
+    else startAnimation();
+  });
+  const handleMotionPreferenceChange = () => {
+    if (motionPreference.matches) stopAnimation();
+    else startAnimation();
+  };
+  if (typeof motionPreference.addEventListener === 'function') {
+    motionPreference.addEventListener('change', handleMotionPreferenceChange);
+  } else {
+    motionPreference.addListener(handleMotionPreferenceChange);
+  }
 
-  window.addEventListener('mousemove', e => {
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    window.addEventListener('mousemove', e => {
     mouseTiltX = (e.clientX - W / 2);
     mouseTiltY = (e.clientY - H / 2);
     
@@ -185,7 +212,8 @@
         n.vy += (dy / dist) * force;
       }
     });
-  });
+    });
+  }
 })();
 
 
@@ -204,6 +232,7 @@
   ];
   const el = document.getElementById('typing-text');
   if (!el) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   let phraseIdx = 0, charIdx = 0, deleting = false;
 
   function type() {
@@ -235,19 +264,16 @@
 (function () {
   const cursor = document.getElementById('cursor');
   const trail = document.getElementById('cursor-trail');
-  if (!cursor) return;
-  let tx = 0, ty = 0;
+  if (!cursor || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
   window.addEventListener('mousemove', e => {
     cursor.style.left = e.clientX + 'px';
     cursor.style.top = e.clientY + 'px';
-    tx = e.clientX; ty = e.clientY;
-  });
-  setInterval(() => {
+    cursor.style.opacity = '1';
     if (trail) {
-      trail.style.left = tx + 'px';
-      trail.style.top = ty + 'px';
+      trail.style.left = e.clientX + 'px';
+      trail.style.top = e.clientY + 'px';
     }
-  }, 80);
+  });
   document.querySelectorAll('a,button').forEach(el => {
     el.addEventListener('mouseenter', () => { cursor.style.width = '20px'; cursor.style.height = '20px'; });
     el.addEventListener('mouseleave', () => { cursor.style.width = '12px'; cursor.style.height = '12px'; });
@@ -260,17 +286,28 @@
 window.addEventListener('scroll', () => {
   const scrollBar = document.getElementById('scroll-bar');
   if (scrollBar) {
-    const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+    const scrollRange = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = scrollRange > 0 ? (window.scrollY / scrollRange) * 100 : 0;
     scrollBar.style.width = pct + '%';
   }
-  const nav = document.getElementById('navbar');
-  if (nav) nav.classList.toggle('scrolled', window.scrollY > 50);
-});
+  const siteHeader = document.getElementById('site-header');
+  if (siteHeader) siteHeader.classList.toggle('scrolled', window.scrollY > 24);
+}, { passive: true });
 
 /* ══════════════════════════════════════════
    REVEAL ON SCROLL (IntersectionObserver)
 ══════════════════════════════════════════ */
 (function () {
+  const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reducedMotion || !('IntersectionObserver' in window)) {
+    revealElements.forEach(el => {
+      el.classList.add('visible');
+      const bar = el.querySelector('.skill-bar');
+      if (bar) bar.style.width = bar.dataset.width + '%';
+    });
+    return;
+  }
   const obs = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
@@ -282,61 +319,98 @@ window.addEventListener('scroll', () => {
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
-  document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach((el, i) => {
+  revealElements.forEach((el, i) => {
     el.style.transitionDelay = (i % 4) * 0.08 + 's';
     obs.observe(el);
   });
 })();
 
-
 /* ══════════════════════════════════════════
-   MOBILE NAV
+   RESPONSIVE NAVIGATION
 ══════════════════════════════════════════ */
+const siteNav = document.querySelector('.site-nav');
+const siteHeader = document.getElementById('site-header');
 const navToggle = document.getElementById('nav-toggle');
-const navLinks  = document.getElementById('nav-links');
-const navClose  = document.getElementById('nav-close');
+const navLinks = document.getElementById('nav-links');
+const mobileNavQuery = window.matchMedia('(max-width: 900px)');
 
-function openMenu() {
-  navLinks.classList.add('open');
-}
-function closeMenu() {
-  navLinks.classList.remove('open');
+function setNavOpen(isOpen, restoreFocus = false) {
+  if (!navToggle || !navLinks) return;
+  const shouldOpen = isOpen && mobileNavQuery.matches;
+  navLinks.classList.toggle('open', shouldOpen);
+  navLinks.inert = mobileNavQuery.matches && !shouldOpen;
+  navLinks.setAttribute('aria-hidden', String(mobileNavQuery.matches && !shouldOpen));
+  navToggle.setAttribute('aria-expanded', String(shouldOpen));
+  navToggle.setAttribute('aria-label', shouldOpen ? 'Close navigation menu' : 'Open navigation menu');
+  const icon = navToggle.querySelector('i');
+  if (icon) icon.className = shouldOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
+  if (restoreFocus && !shouldOpen) navToggle.focus();
 }
 
-if (navToggle && navLinks) {
-  navToggle.addEventListener('click', openMenu);
-}
-if (navClose) {
-  navClose.addEventListener('click', closeMenu);
-}
-if (navLinks) {
-  // Close when any nav link is clicked
-  navLinks.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', closeMenu);
+if (siteNav && navToggle && navLinks) {
+  setNavOpen(false);
+  navToggle.addEventListener('click', () => {
+    setNavOpen(!navLinks.classList.contains('open'));
   });
-  // Close when clicking the dark overlay backdrop
-  navLinks.addEventListener('click', function (e) {
-    if (e.target === navLinks) closeMenu();
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => setNavOpen(false));
   });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && navLinks.classList.contains('open')) {
+      setNavOpen(false, true);
+    }
+  });
+  const handleNavBreakpointChange = () => setNavOpen(false);
+  if (typeof mobileNavQuery.addEventListener === 'function') {
+    mobileNavQuery.addEventListener('change', handleNavBreakpointChange);
+  } else {
+    mobileNavQuery.addListener(handleNavBreakpointChange);
+  }
+
+  const navSectionLinks = navLinks.querySelectorAll('a[href^="#"]');
+  if ('IntersectionObserver' in window) {
+    const navSectionObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        navSectionLinks.forEach(link => {
+          if (link.hash === `#${entry.target.id}`) link.setAttribute('aria-current', 'location');
+          else link.removeAttribute('aria-current');
+        });
+      });
+    }, { rootMargin: '-30% 0px -60% 0px' });
+    document.querySelectorAll('main section[id]').forEach(section => navSectionObserver.observe(section));
+  }
 }
-// Close with Escape key
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeMenu();
-});
+
+
+const copyrightYear = document.getElementById('copyright-year');
+if (copyrightYear) copyrightYear.textContent = new Date().getFullYear();
 
 /* ══════════════════════════════════════════
    CONTACT FORM
 ══════════════════════════════════════════ */
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
+  const requiredFields = [
+    [contactForm.querySelector('[name="name"]'), 'Please enter your name.'],
+    [contactForm.querySelector('[name="message"]'), 'Please enter a message.']
+  ].filter(([field]) => field);
+  requiredFields.forEach(([field]) => {
+    field.addEventListener('input', () => field.setCustomValidity(''));
+  });
   contactForm.addEventListener('submit', function (e) {
     e.preventDefault();
     const successMsg = document.getElementById('form-success');
     const formData = new FormData(this);
-    const name = formData.get('name').trim();
-    const email = formData.get('email').trim();
-    const subject = formData.get('subject').trim() || `Portfolio contact from ${name}`;
-    const message = formData.get('message').trim();
+    const name = String(formData.get('name') || '').trim();
+    const email = String(formData.get('email') || '').trim();
+    const subjectInput = String(formData.get('subject') || '').trim();
+    const subject = (subjectInput || `Portfolio contact from ${name}`).replace(/[\r\n]+/g, ' ');
+    const message = String(formData.get('message') || '').trim();
+    requiredFields.forEach(([field, validationMessage]) => {
+      field.setCustomValidity(field.value.trim() ? '' : validationMessage);
+    });
+    if (!this.reportValidity()) return;
     const body = [`Name: ${name}`, `Email: ${email}`, '', message].join('\n');
     const mailto = `mailto:devendrakumbhare005@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
@@ -347,14 +421,3 @@ if (contactForm) {
     window.location.href = mailto;
   });
 }
-
-/* ══════════════════════════════════════════
-   PROJECT CARD CLICKABILITY
-══════════════════════════════════════════ */
-document.querySelectorAll('.project-card').forEach(card => {
-  card.addEventListener('click', (e) => {
-    if (e.target.closest('a')) return;
-    const link = card.querySelector('.project-link');
-    if (link) window.open(link.href, '_blank');
-  });
-});

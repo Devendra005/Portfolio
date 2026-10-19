@@ -4,7 +4,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Personal-Portfolio Devendra-Kumbhare </title>
+  <meta name="description"
+    content="Devendra Kumbhare is a Computer Science undergraduate specializing in Artificial Intelligence and Data Science, building projects with Python, machine learning, and web technologies.">
+  <meta name="theme-color" content="#04060f">
+  <link rel="canonical" href="https://devendra005.github.io/Portfolio/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://devendra005.github.io/Portfolio/">
+  <meta property="og:title" content="Devendra Kumbhare | AI &amp; Data Science">
+  <meta property="og:description"
+    content="Computer Science undergraduate specializing in Artificial Intelligence and Data Science. Explore Devendra's projects, skills, and resume.">
+  <meta property="og:image" content="https://devendra005.github.io/Portfolio/devendra_portrait.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:alt" content="Portrait of Devendra Kumbhare">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Devendra Kumbhare | AI &amp; Data Science">
+  <meta name="twitter:description"
+    content="Computer Science undergraduate specializing in Artificial Intelligence and Data Science. Explore Devendra's projects, skills, and resume.">
+  <meta name="twitter:image" content="https://devendra005.github.io/Portfolio/devendra_portrait.jpg">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Devendra Kumbhare",
+      "url": "https://devendra005.github.io/Portfolio/",
+      "image": "https://devendra005.github.io/Portfolio/devendra_portrait.jpg",
+      "description": "Computer Science undergraduate specializing in Artificial Intelligence and Data Science.",
+      "sameAs": ["https://github.com/Devendra005"]
+    }
+  </script>
+  <title>Devendra Kumbhare | AI &amp; Data Science Portfolio</title>
+  <link rel="icon" href="devendra_portrait.jpg" type="image/jpeg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -17,57 +46,60 @@
 <body>
 
   <!-- Custom Cursor -->
-  <div id="cursor"></div>
-  <div id="cursor-trail"></div>
+  <div id="cursor" aria-hidden="true"></div>
+  <div id="cursor-trail" aria-hidden="true"></div>
 
   <!-- Scroll Progress -->
-  <div id="scroll-bar"></div>
+  <div id="scroll-bar" aria-hidden="true"></div>
 
   <!-- Neural Canvas Background -->
-  <canvas id="neural-canvas"></canvas>
+  <canvas id="neural-canvas" aria-hidden="true"></canvas>
 
-  <!-- ─── NAVBAR ─── -->
-  <nav id="navbar">
-    <a href="#home" class="nav-logo"><span class="first">D</span>evendra<span>.</span>Kumbhare</a>
-    <ul class="nav-links" id="nav-links">
-      <li class="nav-close-item">
-        <button class="nav-close" id="nav-close" aria-label="Close menu">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </li>
-      <li><a href="#home">Home</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#resume">Resume</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <div class="nav-actions">
-      <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
-        <i class="fa-solid fa-bars"></i>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+
+  <header class="site-header" id="site-header">
+    <nav class="site-nav" aria-label="Main navigation">
+      <a class="nav-brand" href="#home" aria-label="Devendra Kumbhare, home">
+        <span class="nav-monogram" aria-hidden="true">D<span>K</span></span>
+        <span class="nav-brand-copy"><strong>DEVENDRA</strong><small>AI &amp; DATA SCIENCE</small></span>
+      </a>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Open navigation menu"
+        aria-controls="nav-links" aria-expanded="false">
+        <i class="fa-solid fa-bars" aria-hidden="true"></i>
       </button>
-    </div>
-  </nav>
+      <ul class="nav-links" id="nav-links" aria-hidden="true">
+        <li><a class="nav-link" href="#home" aria-label="Home section"><span>01</span>Home</a></li>
+        <li><a class="nav-link" href="#about" aria-label="About section"><span>02</span>About</a></li>
+        <li><a class="nav-link" href="#skills" aria-label="Skills section"><span>03</span>Skills</a></li>
+        <li><a class="nav-link" href="#projects" aria-label="Projects section"><span>04</span>Projects</a></li>
+        <li><a class="nav-link" href="#resume" aria-label="Resume section"><span>05</span>Resume</a></li>
+        <li><a class="nav-link nav-contact" href="#contact" aria-label="Contact section"><span>06</span>Contact</a></li>
+      </ul>
+    </nav>
+  </header>
 
-  <main>
+  <main id="main-content">
 
     <!-- ─── HERO ─── -->
-    <section id="home">
+    <section id="home" aria-labelledby="hero-title">
       <div class="hero-inner">
-        <div class="hero-badge"><i class="fa-solid fa-circle-dot"
+        <div class="hero-badge"><i class="fa-solid fa-circle-dot" aria-hidden="true"
             style="color:var(--accent-cyan);margin-right:8px;"></i>AVAILABLE FOR OPPORTUNITIES</div>
-        <h1 class="hero-name">
+        <h1 class="hero-name" id="hero-title">
           <span class="first">Devendra</span>
           <span class="last">Kumbhare</span>
         </h1>
         <p class="hero-tagline">
-          <span id="typing-text"></span><span class="typing-cursor"></span>
+          <span id="typing-text" aria-hidden="true">AI &amp; Data Science Undergraduate</span>
+          <span class="typing-cursor" aria-hidden="true"></span>
+          <span class="sr-only">AI and Data Science undergraduate.</span>
         </p>
         <p class="hero-sub">Building the future with neural networks, data, and code. Turning complex algorithms into
           real-world intelligence.</p>
         <div class="hero-cta">
-          <a href="#projects" class="btn-primary"><i class="fa-solid fa-brain"></i>View Projects</a>
-          <a href="#contact" class="btn-outline"><i class="fa-solid fa-satellite-dish"></i>Get In Touch</a>
+          <a href="#projects" class="btn-primary"><i class="fa-solid fa-brain" aria-hidden="true"></i>View Projects</a>
+          <a href="#contact" class="btn-outline"><i class="fa-solid fa-satellite-dish"
+              aria-hidden="true"></i>Get In Touch</a>
         </div>
       </div>
       <div class="hero-scroll">
@@ -77,26 +109,29 @@
     </section>
 
     <!-- ─── ABOUT ─── -->
-    <section id="about">
+    <section id="about" aria-labelledby="about-title">
       <div class="container">
         <div class="about-grid">
           <div class="about-avatar-wrap reveal-left">
             <div class="avatar-ring">
-              <img src="devendra_portrait.png" alt="Devendra Kumbhare" class="avatar-img">
+              <img src="devendra_portrait.jpg" alt="Portrait of Devendra Kumbhare" class="avatar-img"
+                width="754" height="1280" loading="lazy" decoding="async">
             </div>
           </div>
           <div class="about-text reveal-right">
             <p class="section-label">// about_me</p>
-            <h2 class="section-title"><span class="glow">Who Am I?</span></h2>
+            <h2 class="section-title" id="about-title"><span class="glow">Who Am I?</span></h2>
             <div class="section-divider"></div>
-            <p>I'm a passionate <strong>Computer Science student</strong> specializing in <strong>Artificial
-                Intelligence & Data Science</strong>. I love building intelligent systems that learn, adapt, and solve
-              real-world problems.</p>
-            <p>My journey began with a fascination for how machines can think. Today, I work with <strong>neural
-                networks, deep learning architectures</strong>, and data pipelines—turning raw data into insight and
-              algorithms into action.</p>
-            <p>When I'm not training models, I'm exploring the <strong>frontiers of NLP, computer vision</strong>, and
-              full-stack development. I believe in building technology that's not just smart, but meaningful.</p>
+            <p>I'm an Artificial Intelligence undergraduate passionate about building intelligent applications, solving
+              real-world problems, and exploring emerging technologies.</p>
+            <p>My technical interests include Machine Learning, Data Science, and Software Development. I enjoy working
+              with Python, SQL, and modern development tools to transform ideas into practical solutions.</p>
+            <p>Through academic projects and hands-on experience, I've developed my problem-solving skills and
+              strengthened my understanding of programming, algorithms, and data-driven applications.</p>
+            <p>Currently, I'm expanding my knowledge of AI/ML and Data Structures &amp; Algorithms while building
+              projects that combine innovation with real-world impact.</p>
+            <p><strong>My goal is to become a skilled software engineer and AI professional who creates meaningful
+                technology that makes a difference.</strong></p>
             <div class="interest-tags">
               <span class="tag">📊 Data Science</span>
               <span class="tag">🤖 Machine Learning</span>
@@ -109,14 +144,14 @@
     </section>
 
     <!-- ─── SKILLS ─── -->
-    <section id="skills">
+    <section id="skills" aria-labelledby="skills-title">
       <div class="container">
         <p class="section-label reveal">// neural_capabilities</p>
-        <h2 class="section-title reveal"><span class="glow">Skill Nodes</span></h2>
+        <h2 class="section-title reveal" id="skills-title"><span class="glow">Skill Nodes</span></h2>
         <div class="section-divider reveal"></div>
         <div class="skills-container">
           <div class="skill-node s-python glass-card reveal">
-            <span class="skill-icon"><i class="fa-brands fa-python"></i></span>
+            <span class="skill-icon"><i class="fa-brands fa-python" aria-hidden="true"></i></span>
             <div class="skill-name">Python</div>
             <div class="skill-bar-wrap">
               <div class="skill-bar" data-width="62"></div>
@@ -124,7 +159,7 @@
             <div class="skill-pct">62%</div>
           </div>
           <div class="skill-node s-dsa glass-card reveal">
-            <span class="skill-icon"><i class="fa-solid fa-diagram-project"></i></span>
+            <span class="skill-icon"><i class="fa-solid fa-diagram-project" aria-hidden="true"></i></span>
             <div class="skill-name">DSA</div>
             <div class="skill-bar-wrap">
               <div class="skill-bar" data-width="65"></div>
@@ -132,15 +167,15 @@
             <div class="skill-pct">65%</div>
           </div>
           <div class="skill-node s-ml glass-card reveal">
-            <span class="skill-icon"><i class="fa-solid fa-robot"></i></span>
+            <span class="skill-icon"><i class="fa-solid fa-robot" aria-hidden="true"></i></span>
             <div class="skill-name">Machine Learning</div>
             <div class="skill-bar-wrap">
               <div class="skill-bar" data-width="40"></div>
             </div>
-            <div class="skill-pct">40</div>
+            <div class="skill-pct">40%</div>
           </div>
           <div class="skill-node s-dl glass-card reveal">
-            <span class="skill-icon"><i class="fa-solid fa-brain"></i></span>
+            <span class="skill-icon"><i class="fa-solid fa-brain" aria-hidden="true"></i></span>
             <div class="skill-name">Deep Learning</div>
             <div class="skill-bar-wrap">
               <div class="skill-bar" data-width="10"></div>
@@ -148,7 +183,7 @@
             <div class="skill-pct">Preparing</div>
           </div>
           <div class="skill-node s-html glass-card reveal">
-            <span class="skill-icon"><i class="fa-brands fa-html5"></i></span>
+            <span class="skill-icon"><i class="fa-brands fa-html5" aria-hidden="true"></i></span>
             <div class="skill-name">HTML5</div>
             <div class="skill-bar-wrap">
               <div class="skill-bar" data-width="90"></div>
@@ -156,7 +191,7 @@
             <div class="skill-pct">90%</div>
           </div>
           <div class="skill-node s-css glass-card reveal">
-            <span class="skill-icon"><i class="fa-brands fa-css3-alt"></i></span>
+            <span class="skill-icon"><i class="fa-brands fa-css3-alt" aria-hidden="true"></i></span>
             <div class="skill-name">CSS</div>
             <div class="skill-bar-wrap">
               <div class="skill-bar" data-width="86"></div>
@@ -168,30 +203,26 @@
     </section>
 
     <!-- ─── PROJECTS ─── -->
-    <section id="projects">
+    <section id="projects" aria-labelledby="projects-title">
       <div class="container">
         <p class="section-label reveal">// deployed_models</p>
-        <h2 class="section-title reveal"><span class="glow">Projects</span></h2>
+        <h2 class="section-title reveal" id="projects-title"><span class="glow">Projects</span></h2>
         <div class="section-divider reveal"></div>
         <div class="projects-grid">
 
           <div class="project-card pc-pink reveal">
             <div class="project-header">
-              <div class="project-icon-wrap"><i class="fa-solid fa-house-chimney"></i></div>
+              <div class="project-icon-wrap"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i></div>
               <div class="project-links">
                 <a href="https://github.com/Devendra005/Floor-Planning-Using-Ai" class="project-link"
                   target="_blank" rel="noopener noreferrer" aria-label="VastuPlan AI source code on GitHub">
-                  <i class="fa-brands fa-github"></i>
-                </a>
-                <a href="https://floor-planning-using-ai.vercel.app" class="project-link"
-                  target="_blank" rel="noopener noreferrer" aria-label="Open VastuPlan AI live demo">
-                  <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                  <i class="fa-brands fa-github" aria-hidden="true"></i>
                 </a>
               </div>
             </div>
             <div class="project-body">
               <div class="project-type">Full-stack · AI Architecture</div>
-              <div class="project-title">VastuPlan AI</div>
+              <h3 class="project-title">VastuPlan AI</h3>
               <p class="project-desc">An AI-assisted floor-planning app combining residential layout generation,
                 Vastu analysis, interactive 3D BIM visualization, and structural and MEP planning tools.</p>
               <div class="project-tags">
@@ -206,15 +237,17 @@
 
           <div class="project-card pc-cyan reveal">
             <div class="project-header">
-              <div class="project-icon-wrap"><i class="fa-solid fa-graduation-cap"></i></div>
+              <div class="project-icon-wrap"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i></div>
               <div class="project-links">
                 <a href="https://github.com/Devendra005/EduTech-Student-Academic-Risk_Prediction" class="project-link"
-                  target="_blank"><i class="fa-brands fa-github"></i></a>
+                  target="_blank" rel="noopener noreferrer"
+                  aria-label="Academic Risk Predictor source code on GitHub"><i class="fa-brands fa-github"
+                    aria-hidden="true"></i></a>
               </div>
             </div>
             <div class="project-body">
               <div class="project-type">EduTech · ML Prediction</div>
-              <div class="project-title">Academic Risk Predictor</div>
+              <h3 class="project-title">Academic Risk Predictor</h3>
               <p class="project-desc">Predicting student performance using machine learning algorithms. Specifically
                 focuses on identifying academic risks using Logistic Regression and data analysis.</p>
               <div class="project-tags">
@@ -228,15 +261,16 @@
 
           <div class="project-card pc-violet reveal">
             <div class="project-header">
-              <div class="project-icon-wrap"><i class="fa-solid fa-code-branch"></i></div>
+              <div class="project-icon-wrap"><i class="fa-solid fa-code-branch" aria-hidden="true"></i></div>
               <div class="project-links">
-                <a href="https://github.com/Devendra005/Python_DSA" class="project-link" target="_blank"><i
-                    class="fa-brands fa-github"></i></a>
+                <a href="https://github.com/Devendra005/Python_DSA" class="project-link" target="_blank"
+                  rel="noopener noreferrer" aria-label="Python DSA Collection source code on GitHub"><i
+                    class="fa-brands fa-github" aria-hidden="true"></i></a>
               </div>
             </div>
             <div class="project-body">
               <div class="project-type">Algorithm · Data Structures</div>
-              <div class="project-title">Python DSA Collection</div>
+              <h3 class="project-title">Python DSA Collection</h3>
               <p class="project-desc">A comprehensive repository of common Data Structures and Algorithms implemented in
                 Python, optimized for performance and clarity.</p>
               <div class="project-tags">
@@ -249,15 +283,16 @@
 
           <div class="project-card pc-blue reveal">
             <div class="project-header">
-              <div class="project-icon-wrap"><i class="fa-solid fa-calculator"></i></div>
+              <div class="project-icon-wrap"><i class="fa-solid fa-calculator" aria-hidden="true"></i></div>
               <div class="project-links">
-                <a href="https://github.com/Devendra005/BMI-calculator" class="project-link" target="_blank"><i
-                    class="fa-brands fa-github"></i></a>
+                <a href="https://github.com/Devendra005/BMI-calculator" class="project-link" target="_blank"
+                  rel="noopener noreferrer" aria-label="BMI Calculator Engine source code on GitHub"><i
+                    class="fa-brands fa-github" aria-hidden="true"></i></a>
               </div>
             </div>
             <div class="project-body">
               <div class="project-type">Python · Utility</div>
-              <div class="project-title">BMI Calculator Engine</div>
+              <h3 class="project-title">BMI Calculator Engine</h3>
               <p class="project-desc">A streamlined health utility built with Python that calculates Body Mass Index and
                 provides real-time health categorization based on user input.</p>
               <div class="project-tags">
@@ -271,24 +306,25 @@
     </section>
     
     <!-- ─── RESUME ─── -->
-    <section id="resume">
+    <section id="resume" aria-labelledby="resume-title">
       <div class="container">
         <div class="resume-inner">
           <p class="section-label reveal">// credentials</p>
-          <h2 class="section-title reveal" style="margin-bottom:48px;"><span class="glow">Resume</span></h2>
+          <h2 class="section-title reveal" id="resume-title" style="margin-bottom:48px;"><span
+              class="glow">Resume</span></h2>
           <div class="resume-card reveal">
-            <i class="fa-solid fa-file-code resume-icon"></i>
-            <h2>Download My Resume</h2>
+            <i class="fa-solid fa-file-code resume-icon" aria-hidden="true"></i>
+            <h3>Download My Resume</h3>
             <p>A snapshot of my education, technical skills, AI/ML projects, and academic achievements. Available in PDF
               format, ready to send.</p>
             <div class="resume-features">
-              <div class="resume-feat"><i class="fa-solid fa-graduation-cap"></i> Education</div>
-              <div class="resume-feat"><i class="fa-solid fa-code-branch"></i> Projects</div>
-              <div class="resume-feat"><i class="fa-solid fa-certificate"></i> Certifications</div>
-              <div class="resume-feat"><i class="fa-solid fa-star"></i> Achievements</div>
+              <div class="resume-feat"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> Education</div>
+              <div class="resume-feat"><i class="fa-solid fa-code-branch" aria-hidden="true"></i> Projects</div>
+              <div class="resume-feat"><i class="fa-solid fa-certificate" aria-hidden="true"></i> Certifications</div>
+              <div class="resume-feat"><i class="fa-solid fa-star" aria-hidden="true"></i> Achievements</div>
             </div>
             <a href="Devendra_Kumbhare_Resume.pdf" class="btn-primary" download>
-              <i class="fa-solid fa-download"></i>Download Resume
+              <i class="fa-solid fa-download" aria-hidden="true"></i>Download Resume
             </a>
           </div>
         </div>
@@ -296,33 +332,34 @@
     </section>
 
     <!-- ─── CONTACT ─── -->
-    <section id="contact">
+    <section id="contact" aria-labelledby="contact-title">
       <div class="container">
         <p class="section-label reveal">// establish_connection</p>
-        <h2 class="section-title reveal"><span class="glow">Contact</span></h2>
+        <h2 class="section-title reveal" id="contact-title"><span class="glow">Contact</span></h2>
         <div class="section-divider reveal"></div>
         <div class="contact-grid">
           <div class="reveal-left">
             <h3>Let's Build Something.</h3>
             <div class="contact-links">
               <a href="mailto:devendrakumbhare005@gmail.com" class="contact-link">
-                <div class="contact-link-icon"><i class="fa-solid fa-envelope"></i></div>
+                <div class="contact-link-icon"><i class="fa-solid fa-envelope" aria-hidden="true"></i></div>
                 <div class="contact-link-text">
                   <strong>Email</strong>
                   <span>devendrakumbhare005@gmail.com</span>
                 </div>
               </a>
-              <a href="https://linkedin.com/in/devendra-kumbhare" target="_blank" class="contact-link">
+              <a href="https://linkedin.com/in/devendra-kumbhare" target="_blank" rel="noopener noreferrer"
+                class="contact-link">
                 <div class="contact-link-icon" style="background:rgba(0,120,255,0.1);color:#4d8fff;"><i
-                    class="fa-brands fa-linkedin"></i></div>
+                    class="fa-brands fa-linkedin" aria-hidden="true"></i></div>
                 <div class="contact-link-text">
                   <strong>LinkedIn</strong>
                   <span>linkedin.com/in/devendra-kumbhare</span>
                 </div>
               </a>
-              <a href="https://github.com/Devendra005" target="_blank" class="contact-link">
+              <a href="https://github.com/Devendra005" target="_blank" rel="noopener noreferrer" class="contact-link">
                 <div class="contact-link-icon" style="background:rgba(180,77,255,0.1);color:var(--accent-violet);"><i
-                    class="fa-brands fa-github"></i></div>
+                    class="fa-brands fa-github" aria-hidden="true"></i></div>
                 <div class="contact-link-text">
                   <strong>GitHub</strong>
                   <span>github.com/Devendra005</span>
@@ -331,30 +368,37 @@
             </div>
           </div>
           <div class="reveal-right">
-            <form class="contact-form" id="contact-form" action="mailto:devendrakumbhare005@gmail.com"
-              method="POST" enctype="text/plain">
+            <p class="contact-form-note">This form has no server-side delivery. Submitting opens your email app with a
+              draft; nothing is sent until you review and send it.</p>
+            <noscript>
+              <p class="contact-form-note">JavaScript is required to prepare the email draft. You can contact me
+                directly at <a href="mailto:devendrakumbhare005@gmail.com">my email address</a>.</p>
+            </noscript>
+            <form class="contact-form" id="contact-form" method="post">
               <div class="form-row">
                 <div class="form-group">
                   <label for="contact-name">Name</label>
-                  <input id="contact-name" type="text" name="name" placeholder="John Doe" autocomplete="name" required>
+                  <input id="contact-name" type="text" name="name" placeholder="John Doe" autocomplete="name"
+                    maxlength="120" required>
                 </div>
                 <div class="form-group">
                   <label for="contact-email">Email</label>
                   <input id="contact-email" type="email" name="email" placeholder="john@example.com"
-                    autocomplete="email" required>
+                    autocomplete="email" maxlength="254" required>
                 </div>
               </div>
               <div class="form-group">
                 <label for="contact-subject">Subject</label>
-                <input id="contact-subject" type="text" name="subject" placeholder="Project collaboration...">
+                <input id="contact-subject" type="text" name="subject" placeholder="Project collaboration..."
+                  maxlength="160">
               </div>
               <div class="form-group">
                 <label for="contact-message">Message</label>
                 <textarea id="contact-message" name="message"
-                  placeholder="Tell me about your project or opportunity..." required></textarea>
+                  placeholder="Tell me about your project or opportunity..." maxlength="5000" required></textarea>
               </div>
               <button type="submit" class="btn-primary" style="width:100%;justify-content:center;">
-                <i class="fa-solid fa-paper-plane"></i>Send Message
+                <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>Send Message
               </button>
               <div class="form-success" id="form-success" role="status" aria-live="polite"></div>
             </form>
@@ -369,12 +413,17 @@
   <footer>
     <div class="footer-inner">
       <div class="footer-copy">
-        © 2025 <span>Devendra Kumbhare</span> · Built with <span>♥</span> & Neural Nets
+        © <span id="copyright-year">2026</span> <span>Devendra Kumbhare</span> · Built with <span>♥</span> &amp; Neural Nets
       </div>
       <div class="footer-social">
-        <a href="https://github.com/Devendra005" class="social-btn"><i class="fa-brands fa-github"></i></a>
-        <a href="https://linkedin.com/in/devendra-kumbhare" class="social-btn"><i class="fa-brands fa-linkedin"></i></a>
-        <a href="https://www.instagram.com/dev___619?igsh=M2JnNjkybGc0ZWEw" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://github.com/Devendra005" class="social-btn" target="_blank" rel="noopener noreferrer"
+          aria-label="GitHub profile"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+        <a href="https://linkedin.com/in/devendra-kumbhare" class="social-btn" target="_blank"
+          rel="noopener noreferrer" aria-label="LinkedIn profile"><i class="fa-brands fa-linkedin"
+            aria-hidden="true"></i></a>
+        <a href="https://www.instagram.com/dev___619/" class="social-btn" target="_blank"
+          rel="noopener noreferrer" aria-label="Instagram profile"><i class="fa-brands fa-instagram"
+            aria-hidden="true"></i></a>
       </div>
     </div>
   </footer>
