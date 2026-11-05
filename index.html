@@ -70,6 +70,7 @@
       <ul class="nav-links" id="nav-links" aria-hidden="true">
         <li><a class="nav-link" href="#home" aria-label="Home section"><span></span>Home</a></li>
         <li><a class="nav-link" href="#about" aria-label="About section"><span></span>About</a></li>
+        <li><a class="nav-link" href="#education" aria-label="Education section"><span></span>Education</a></li>
         <li><a class="nav-link" href="#skills" aria-label="Skills section"><span></span>Skills</a></li>
         <li><a class="nav-link" href="#projects" aria-label="Projects section"><span></span>Projects</a></li>
         <li><a class="nav-link" href="#resume" aria-label="Resume section"><span></span>Resume</a></li>
@@ -143,61 +144,146 @@
       </div>
     </section>
 
+    <!-- ─── EDUCATION ─── -->
+    <section id="education" aria-labelledby="education-title">
+      <div class="container">
+        <p class="section-label reveal">// academic_background</p>
+        <h2 class="section-title reveal" id="education-title"><span class="glow">Education</span></h2>
+        <div class="section-divider reveal"></div>
+        <ol class="education-timeline">
+          <li class="education-item reveal">
+            <span class="education-marker" aria-hidden="true"><i class="fa-solid fa-school"></i></span>
+            <article class="education-card glass-card">
+              <div class="education-card-heading">
+                <h3>B.Tech (Artificial Intelligence)</h3>
+                <span class="education-score" aria-label="Score: 8.5"><i class="fa-solid fa-star"
+                    aria-hidden="true"></i> 7.5</span>
+              </div>
+              <p class="education-school">Guru Nanak Institute of Engineering & Technology</p>
+              <div class="education-meta">
+                <span><i class="fa-solid fa-calendar-days" aria-hidden="true"></i> 2023 - 2027</span>
+                <span><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Nagpur, Maharashtra</span>
+              </div>
+            </article>
+          </li>
+          <li class="education-item reveal">
+            <span class="education-marker" aria-hidden="true"><i class="fa-solid fa-school"></i></span>
+            <article class="education-card glass-card">
+              <div class="education-card-heading">
+                <h3>12th</h3>
+                <span class="education-score" aria-label="Score: 96.67"><i class="fa-solid fa-star"
+                    aria-hidden="true"></i> 62.00</span>
+              </div>
+              <p class="education-school">Jawahar Jr. Arts & Science College</p>
+              <div class="education-meta">
+                <span><i class="fa-solid fa-calendar-days" aria-hidden="true"></i> 2021 - 2022</span>
+                <span><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Nagpur, Maharashtra</span>
+              </div>
+            </article>
+          </li>
+          <li class="education-item reveal">
+            <span class="education-marker" aria-hidden="true"><i class="fa-solid fa-school"></i></span>
+            <article class="education-card glass-card">
+              <div class="education-card-heading">
+                <h3>10th</h3>
+                <span class="education-score" aria-label="Score: 88"><i class="fa-solid fa-star"
+                    aria-hidden="true"></i> 80.40</span>
+              </div>
+              <p class="education-school">MPL. Rajendra High School [State]</p>
+              <div class="education-meta">
+                <span><i class="fa-solid fa-calendar-days" aria-hidden="true"></i> 2019 - 2020</span>
+                <span><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Nagpur, Maharashtra</span>
+              </div>
+            </article>
+          </li>
+        </ol>
+      </div>
+    </section>
+
     <!-- ─── SKILLS ─── -->
     <section id="skills" aria-labelledby="skills-title">
       <div class="container">
         <p class="section-label reveal">// neural_capabilities</p>
-        <h2 class="section-title reveal" id="skills-title"><span class="glow">Skill Nodes</span></h2>
+        <h2 class="section-title reveal" id="skills-title"><span class="glow">Skills</span></h2>
         <div class="section-divider reveal"></div>
         <div class="skills-container">
-          <div class="skill-node s-python glass-card reveal">
-            <span class="skill-icon"><i class="fa-brands fa-python" aria-hidden="true"></i></span>
-            <div class="skill-name">Python</div>
-            <div class="skill-bar-wrap">
-              <div class="skill-bar" data-width="62"></div>
+          <article class="skill-group skill-group-programming glass-card reveal">
+            <header class="skill-group-header">
+              <span class="skill-group-icon" aria-hidden="true"><i class="fa-solid fa-code"></i></span>
+              <div>
+                <h3>Coding</h3>
+                <p>5 skills</p>
+              </div>
+            </header>
+            <div class="skill-group-list">
+              <div class="skill-node s-python skill-item reveal">
+                <span class="skill-icon"><i class="fa-brands fa-python" aria-hidden="true"></i></span>
+                <div class="skill-name">Python</div>
+                <div class="skill-pct">62%</div>
+              </div>
+              <div class="skill-node s-dsa skill-item reveal">
+                <span class="skill-icon"><i class="fa-solid fa-diagram-project" aria-hidden="true"></i></span>
+                <div class="skill-name">DSA</div>
+                <div class="skill-pct">65%</div>
+              </div>
+              <div class="skill-node s-mysql skill-item reveal">
+                <span class="skill-icon"><i class="fa-solid fa-database" aria-hidden="true"></i></span>
+                <div class="skill-name">MySQL</div>
+                <div class="skill-pct">85%</div>
+              </div>
+              <div class="skill-node s-c skill-item reveal">
+                <span class="skill-icon"><i class="fa-solid fa-c" aria-hidden="true"></i></span>
+                <div class="skill-name">C</div>
+                <div class="skill-pct">80%</div>
+              </div>
+              <div class="skill-node s-java skill-item skill-item-no-rating reveal">
+                <span class="skill-icon"><i class="fa-brands fa-java" aria-hidden="true"></i></span>
+                <div class="skill-name">Java (Basics)</div>
+              </div>
             </div>
-            <div class="skill-pct">62%</div>
-          </div>
-          <div class="skill-node s-dsa glass-card reveal">
-            <span class="skill-icon"><i class="fa-solid fa-diagram-project" aria-hidden="true"></i></span>
-            <div class="skill-name">DSA</div>
-            <div class="skill-bar-wrap">
-              <div class="skill-bar" data-width="65"></div>
+          </article>
+          <article class="skill-group skill-group-ai glass-card reveal">
+            <header class="skill-group-header">
+              <span class="skill-group-icon" aria-hidden="true"><i class="fa-solid fa-brain"></i></span>
+              <div>
+                <h3>AI &amp; Machine Learning</h3>
+                <p>2 skills</p>
+              </div>
+            </header>
+            <div class="skill-group-list">
+              <div class="skill-node s-ml skill-item reveal">
+                <span class="skill-icon"><i class="fa-solid fa-robot" aria-hidden="true"></i></span>
+                <div class="skill-name">Machine Learning</div>
+                <div class="skill-pct">40%</div>
+              </div>
+              <div class="skill-node s-dl skill-item reveal">
+                <span class="skill-icon"><i class="fa-solid fa-brain" aria-hidden="true"></i></span>
+                <div class="skill-name">Deep Learning</div>
+                <div class="skill-pct">Preparing</div>
+              </div>
             </div>
-            <div class="skill-pct">65%</div>
-          </div>
-          <div class="skill-node s-ml glass-card reveal">
-            <span class="skill-icon"><i class="fa-solid fa-robot" aria-hidden="true"></i></span>
-            <div class="skill-name">Machine Learning</div>
-            <div class="skill-bar-wrap">
-              <div class="skill-bar" data-width="40"></div>
+          </article>
+          <article class="skill-group skill-group-web glass-card reveal">
+            <header class="skill-group-header">
+              <span class="skill-group-icon" aria-hidden="true"><i class="fa-solid fa-laptop-code"></i></span>
+              <div>
+                <h3>Frontend Technologies</h3>
+                <p>2 skills</p>
+              </div>
+            </header>
+            <div class="skill-group-list">
+              <div class="skill-node s-html skill-item reveal">
+                <span class="skill-icon"><i class="fa-brands fa-html5" aria-hidden="true"></i></span>
+                <div class="skill-name">HTML5</div>
+                <div class="skill-pct">90%</div>
+              </div>
+              <div class="skill-node s-css skill-item reveal">
+                <span class="skill-icon"><i class="fa-brands fa-css3-alt" aria-hidden="true"></i></span>
+                <div class="skill-name">CSS</div>
+                <div class="skill-pct">86%</div>
+              </div>
             </div>
-            <div class="skill-pct">40%</div>
-          </div>
-          <div class="skill-node s-dl glass-card reveal">
-            <span class="skill-icon"><i class="fa-solid fa-brain" aria-hidden="true"></i></span>
-            <div class="skill-name">Deep Learning</div>
-            <div class="skill-bar-wrap">
-              <div class="skill-bar" data-width="10"></div>
-            </div>
-            <div class="skill-pct">Preparing</div>
-          </div>
-          <div class="skill-node s-html glass-card reveal">
-            <span class="skill-icon"><i class="fa-brands fa-html5" aria-hidden="true"></i></span>
-            <div class="skill-name">HTML5</div>
-            <div class="skill-bar-wrap">
-              <div class="skill-bar" data-width="90"></div>
-            </div>
-            <div class="skill-pct">90%</div>
-          </div>
-          <div class="skill-node s-css glass-card reveal">
-            <span class="skill-icon"><i class="fa-brands fa-css3-alt" aria-hidden="true"></i></span>
-            <div class="skill-name">CSS</div>
-            <div class="skill-bar-wrap">
-              <div class="skill-bar" data-width="86"></div>
-            </div>
-            <div class="skill-pct">86%</div>
-          </div>
+          </article>
         </div>
       </div>
     </section>

@@ -303,8 +303,6 @@ window.addEventListener('scroll', () => {
   if (reducedMotion || !('IntersectionObserver' in window)) {
     revealElements.forEach(el => {
       el.classList.add('visible');
-      const bar = el.querySelector('.skill-bar');
-      if (bar) bar.style.width = bar.dataset.width + '%';
     });
     return;
   }
@@ -312,9 +310,6 @@ window.addEventListener('scroll', () => {
     entries.forEach(e => {
       if (e.isIntersecting) {
         e.target.classList.add('visible');
-        // Animate skill bars
-        const bar = e.target.querySelector('.skill-bar');
-        if (bar) bar.style.width = bar.dataset.width + '%';
       }
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
