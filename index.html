@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description"
     content="Devendra Kumbhare is a Computer Science undergraduate specializing in Artificial Intelligence and Data Science, building projects with Python, machine learning, and web technologies.">
-  <meta name="theme-color" content="#04060f">
+  <meta name="theme-color" content="#050505">
   <link rel="canonical" href="https://devendra005.github.io/Portfolio/">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://devendra005.github.io/Portfolio/">
@@ -45,15 +45,8 @@
 
 <body>
 
-  <!-- Custom Cursor -->
-  <div id="cursor" aria-hidden="true"></div>
-  <div id="cursor-trail" aria-hidden="true"></div>
-
   <!-- Scroll Progress -->
   <div id="scroll-bar" aria-hidden="true"></div>
-
-  <!-- Neural Canvas Background -->
-  <canvas id="neural-canvas" aria-hidden="true"></canvas>
 
   <a class="skip-link" href="#main-content">Skip to content</a>
 
@@ -84,8 +77,8 @@
     <!-- ─── HERO ─── -->
     <section id="home" aria-labelledby="hero-title">
       <div class="hero-inner">
-        <div class="hero-badge"><i class="fa-solid fa-circle-dot" aria-hidden="true"
-            style="color:var(--accent-cyan);margin-right:8px;"></i>AVAILABLE FOR OPPORTUNITIES</div>
+        <div class="hero-badge"><i class="fa-solid fa-circle-dot hero-badge-icon"
+            aria-hidden="true"></i>AVAILABLE FOR OPPORTUNITIES</div>
         <h1 class="hero-name" id="hero-title">
           <span class="first">Devendra</span>
           <span class="last">Kumbhare</span>
@@ -156,7 +149,7 @@
             <article class="education-card glass-card">
               <div class="education-card-heading">
                 <h3>B.Tech (Artificial Intelligence)</h3>
-                <span class="education-score" aria-label="Score: 8.5"><i class="fa-solid fa-star"
+                <span class="education-score" aria-label="CGPA: 7.5"><i class="fa-solid fa-star"
                     aria-hidden="true"></i> 7.5</span>
               </div>
               <p class="education-school">Guru Nanak Institute of Engineering & Technology</p>
@@ -171,7 +164,7 @@
             <article class="education-card glass-card">
               <div class="education-card-heading">
                 <h3>12th</h3>
-                <span class="education-score" aria-label="Score: 96.67"><i class="fa-solid fa-star"
+                <span class="education-score" aria-label="Percentage: 62.00"><i class="fa-solid fa-star"
                     aria-hidden="true"></i> 62.00</span>
               </div>
               <p class="education-school">Jawahar Jr. Arts & Science College</p>
@@ -186,7 +179,7 @@
             <article class="education-card glass-card">
               <div class="education-card-heading">
                 <h3>10th</h3>
-                <span class="education-score" aria-label="Score: 88"><i class="fa-solid fa-star"
+                <span class="education-score" aria-label="Percentage: 80.40"><i class="fa-solid fa-star"
                     aria-hidden="true"></i> 80.40</span>
               </div>
               <p class="education-school">MPL. Rajendra High School [State]</p>
@@ -396,7 +389,7 @@
       <div class="container">
         <div class="resume-inner">
           <p class="section-label reveal">// credentials</p>
-          <h2 class="section-title reveal" id="resume-title" style="margin-bottom:48px;"><span
+          <h2 class="section-title reveal resume-title" id="resume-title"><span
               class="glow">Resume</span></h2>
           <div class="resume-card reveal">
             <i class="fa-solid fa-file-code resume-icon" aria-hidden="true"></i>
@@ -436,7 +429,7 @@
               </a>
               <a href="https://linkedin.com/in/devendra-kumbhare" target="_blank" rel="noopener noreferrer"
                 class="contact-link">
-                <div class="contact-link-icon" style="background:rgba(0,120,255,0.1);color:#4d8fff;"><i
+                <div class="contact-link-icon"><i
                     class="fa-brands fa-linkedin" aria-hidden="true"></i></div>
                 <div class="contact-link-text">
                   <strong>LinkedIn</strong>
@@ -444,7 +437,7 @@
                 </div>
               </a>
               <a href="https://github.com/Devendra005" target="_blank" rel="noopener noreferrer" class="contact-link">
-                <div class="contact-link-icon" style="background:rgba(180,77,255,0.1);color:var(--accent-violet);"><i
+                <div class="contact-link-icon"><i
                     class="fa-brands fa-github" aria-hidden="true"></i></div>
                 <div class="contact-link-text">
                   <strong>GitHub</strong>
@@ -453,7 +446,7 @@
               </a>
               <a href="https://leetcode.com/u/Devendra005/" target="_blank" rel="noopener noreferrer"
                 class="contact-link">
-                <div class="contact-link-icon" style="background:rgba(255,161,22,0.1);color:#ffa116;"><i
+                <div class="contact-link-icon"><i
                     class="fa-solid fa-code" aria-hidden="true"></i></div>
                 <div class="contact-link-text">
                   <strong>LeetCode</strong>
@@ -492,7 +485,7 @@
                 <textarea id="contact-message" name="message"
                   placeholder="Tell me about your project or opportunity..." maxlength="5000" required></textarea>
               </div>
-              <button type="submit" class="btn-primary" style="width:100%;justify-content:center;">
+              <button type="submit" class="btn-primary contact-submit">
                 <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>Send Message
               </button>
               <div class="form-success" id="form-success" role="status" aria-live="polite"></div>
@@ -508,7 +501,7 @@
   <footer>
     <div class="footer-inner">
       <div class="footer-copy">
-        © <span id="copyright-year">2026</span> <span>Devendra Kumbhare</span> · Built with <span>♥</span> &amp; Neural Nets
+        © <span id="copyright-year">2026</span> <span>Devendra Kumbhare</span>
       </div>
       <div class="footer-social">
         <a href="https://github.com/Devendra005" class="social-btn" target="_blank" rel="noopener noreferrer"
@@ -516,7 +509,7 @@
         <a href="https://linkedin.com/in/devendra-kumbhare" class="social-btn" target="_blank"
           rel="noopener noreferrer" aria-label="LinkedIn profile"><i class="fa-brands fa-linkedin"
             aria-hidden="true"></i></a>
-        <a href="https://www.instagram.com/dev___619/" class="social-btn" target="_blank"
+        <a href="https://www.instagram.com/devendra___1805/" class="social-btn" target="_blank"
           rel="noopener noreferrer" aria-label="Instagram profile"><i class="fa-brands fa-instagram"
             aria-hidden="true"></i></a>
         <a href="https://leetcode.com/u/Devendra005/" class="social-btn" target="_blank"
